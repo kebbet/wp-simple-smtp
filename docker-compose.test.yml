@@ -1,0 +1,14 @@
+version: '3.6'
+services:
+  mail:
+    image: mailhog/mailhog:latest
+  sut:
+    build: 
+      context: ./docker
+      dockerfile: utest.Dockerfile
+    command: ./vendor/bin/phpunit
+    volumes:
+    - ".:/project"
+    environment:
+      SMTP_HOST: mail
+      SMTP_PORT: 1025
